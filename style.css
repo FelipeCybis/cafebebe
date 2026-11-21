@@ -256,11 +256,43 @@ dialog[data-step="pay"] #gift-link {
 }
 
 #amount-form,
-#pay,
+.pay-pix,
 #note-form {
   display: grid;
   gap: 0.75rem;
+}
+
+#amount-form,
+#pay {
   margin-top: 1.25rem;
+}
+
+/* The note sits under the Pix part, behind a divider. On a wide screen the
+   dialog grows and the note moves to the right of the Pix part. */
+.pay-note {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1.5px solid var(--line);
+  text-align: left;
+}
+
+@media (min-width: 48rem) {
+  dialog[data-step="pay"] {
+    width: min(100% - 2rem, 52rem);
+  }
+
+  #pay {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .pay-note {
+    margin-top: 0;
+    padding: 0 0 0 2rem;
+    border-top: 0;
+    border-left: 1.5px solid var(--line);
+  }
 }
 
 label {
@@ -358,14 +390,7 @@ textarea {
   margin: 0 auto;
 }
 
-#note-form {
-  padding-top: 1.25rem;
-  border-top: 1.5px solid var(--line);
-  text-align: left;
-}
-
 #note-sent {
-  margin-top: 1.25rem;
   font-weight: 600;
 }
 
