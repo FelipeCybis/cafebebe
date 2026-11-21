@@ -82,6 +82,28 @@
       "price": 150
     },
     {
+      "id": "bottle-warmer",
+      "name": "Aquecedor de mamadeira",
+      "category": "Alimentação",
+      "emoji": "♨️",
+      "description": "Para a mamadeira na temperatura certa.",
+      "price": 29.99,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B084PMMS2H",
+      "photo": "https://m.media-amazon.com/images/I/710imLQ+kJL._AC_SL600_.jpg"
+    },
+    {
+      "id": "portable-bottle-warmer",
+      "name": "Aquecedor de mamadeira portátil",
+      "category": "Alimentação",
+      "emoji": "🎒",
+      "description": "Para a mamadeira quentinha nos passeios.",
+      "price": 71.99,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B0GWH4W3DQ",
+      "photo": "https://m.media-amazon.com/images/I/61LIaWx+kIL._AC_SL600_.jpg"
+    },
+    {
       "id": "high-chair",
       "name": "Cadeira de alimentação",
       "category": "Alimentação",
