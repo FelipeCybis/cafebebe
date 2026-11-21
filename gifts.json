@@ -152,20 +152,6 @@
       "emoji": "🥣",
       "description": "Para as primeiras papinhas.",
       "price": 600
-    },
-    {
-      "id": "books",
-      "name": "Livros infantis",
-      "category": "Brincar",
-      "emoji": "📚",
-      "description": "Para as histórias antes de dormir."
-    },
-    {
-      "id": "toys",
-      "name": "Brinquedos",
-      "category": "Brincar",
-      "emoji": "🧸",
-      "description": "Para brincar e descobrir o mundo."
     }
   ]
 }
