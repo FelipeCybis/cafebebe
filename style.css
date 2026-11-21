@@ -306,6 +306,38 @@ dialog::backdrop {
   background: rgb(29 43 94 / 0.5);
 }
 
+/* Close button. Its row takes no room and sticks to the top of the dialog, so the
+   button hangs over the corner of the content and stays in view while it scrolls.
+   The z-index keeps it above the photo and the option arrows. */
+.close-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 0;
+  text-align: right;
+}
+
+.close {
+  position: relative; /* nudged into the dialog padding, towards the corner */
+  top: -0.75rem;
+  right: -0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0 0.125rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
 dialog .disc {
   width: 5.5rem;
   margin: 0 auto;

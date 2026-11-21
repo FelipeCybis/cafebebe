@@ -47,8 +47,11 @@
     </div>
   </template>
 
-  <!-- No close button: a click outside the dialog or the Esc key closes it (see app.js). -->
+  <!-- Closes with the button, with the Esc key, or with a click outside it (see app.js). -->
   <dialog id="gift-dialog" aria-labelledby="dialog-name">
+    <!-- The button stays at the top right corner, over the content, also when the dialog scrolls. -->
+    <form method="dialog" class="close-row"><button class="close" aria-label="Fechar">×</button></form>
+
     <!-- Step 1, top: one slide per product option of the gift. With more than one
          option, the slides move sideways and the arrows and the counter show. -->
     <div class="options">
