@@ -1,0 +1,100 @@
+{
+  "pix": {
+    "key": "REPLACE-WITH-PIX-KEY",
+    "name": "NAME AS IN THE BANK",
+    "city": "CITY"
+  },
+  "suggestedAmounts": [50, 100, 200],
+  "gifts": [
+    {
+      "id": "any",
+      "name": "Contribuição livre",
+      "emoji": "🎁",
+      "description": "Para o que o bebê precisar."
+    },
+    {
+      "id": "stroller",
+      "name": "Carrinho de bebê",
+      "category": "Passeio",
+      "emoji": "🚼",
+      "description": "Para os passeios no parque.",
+      "referencePrice": 1500
+    },
+    {
+      "id": "car-seat",
+      "name": "Cadeirinha para o carro",
+      "category": "Passeio",
+      "emoji": "🚗",
+      "description": "Para viajar em segurança.",
+      "referencePrice": 900
+    },
+    {
+      "id": "crib",
+      "name": "Berço",
+      "category": "Quarto",
+      "emoji": "🛏️",
+      "description": "Para as noites de sono.",
+      "referencePrice": 1200
+    },
+    {
+      "id": "baby-monitor",
+      "name": "Babá eletrônica",
+      "category": "Quarto",
+      "emoji": "📹",
+      "description": "Para ficar de olho no soninho.",
+      "referencePrice": 400
+    },
+    {
+      "id": "diapers",
+      "name": "Fraldas",
+      "category": "Cuidados",
+      "emoji": "🧷",
+      "description": "Nunca são demais."
+    },
+    {
+      "id": "bathtub",
+      "name": "Banheira",
+      "category": "Cuidados",
+      "emoji": "🛁",
+      "description": "Para a hora do banho.",
+      "referencePrice": 250
+    },
+    {
+      "id": "clothes",
+      "name": "Roupinhas",
+      "category": "Cuidados",
+      "emoji": "🧦",
+      "description": "Para os primeiros meses."
+    },
+    {
+      "id": "bottles",
+      "name": "Mamadeiras",
+      "category": "Alimentação",
+      "emoji": "🍼",
+      "description": "Para a hora de mamar.",
+      "referencePrice": 150
+    },
+    {
+      "id": "high-chair",
+      "name": "Cadeira de alimentação",
+      "category": "Alimentação",
+      "emoji": "🥣",
+      "description": "Para as primeiras papinhas.",
+      "referencePrice": 600
+    },
+    {
+      "id": "books",
+      "name": "Livros infantis",
+      "category": "Brincar",
+      "emoji": "📚",
+      "description": "Para as histórias antes de dormir."
+    },
+    {
+      "id": "toys",
+      "name": "Brinquedos",
+      "category": "Brincar",
+      "emoji": "🧸",
+      "description": "Para brincar e descobrir o mundo."
+    }
+  ]
+}

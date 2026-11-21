@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Café Bebê: lista de presentes</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍼</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Café Bebê</h1>
+    <!-- Placeholders: replace with the real names, date and place. -->
+    <p class="hosts">[Nome] e [Nome] esperam você</p>
+    <p class="when">[dia, data e horário], em [local]</p>
+    <p class="welcome">Escolha um presente, diga quanto quer dar e pague por Pix. Qualquer valor vale, e o Pix cai direto na nossa conta, sem taxa.</p>
+  </header>
+
+  <main>
+    <div id="filters" role="group" aria-label="Filtrar por categoria"></div>
+    <p id="load-error" class="error" role="alert" hidden>A lista de presentes não carregou. Recarregue a página.</p>
+    <ul id="gifts"></ul>
+  </main>
+
+  <template id="gift-card">
+    <li>
+      <button type="button" class="gift">
+        <span class="disc" aria-hidden="true"></span>
+        <span class="gift-name"></span>
+        <span class="gift-description"></span>
+        <span class="gift-price"></span>
+      </button>
+    </li>
+  </template>
+
+  <dialog id="gift-dialog" aria-labelledby="dialog-name">
+    <form method="dialog"><button class="close" aria-label="Fechar">×</button></form>
+    <div class="disc" aria-hidden="true"></div>
+    <h2 id="dialog-name" class="gift-name"></h2>
+    <p class="gift-description"></p>
+
+    <!-- Step 1: choose the amount. -->
+    <form id="amount-form" novalidate>
+      <label for="amount">Quanto você quer dar?</label>
+      <div id="suggestions"></div>
+      <input id="amount" inputmode="decimal" autocomplete="off" placeholder="Outro valor, em reais" aria-describedby="amount-error">
+      <p id="amount-error" class="error" role="alert"></p>
+      <button class="primary" id="generate">Gerar Pix</button>
+    </form>
+
+    <!-- Step 2: pay, then optionally leave a note. -->
+    <div id="pay" hidden>
+      <p class="pay-title">Pix de <strong id="pay-amount"></strong></p>
+      <p id="placeholder-warning" class="error" hidden>Chave Pix de exemplo: este código ainda não funciona.</p>
+      <button type="button" class="primary" id="copy">Copiar código Pix</button>
+      <p id="copy-status" class="hint" role="status"></p>
+      <p class="hint">No app do seu banco, escolha Pix copia e cola e cole o código. O recebedor que aparece lá é <strong id="payee"></strong>.</p>
+      <textarea id="pix-code" readonly rows="4" aria-label="Código Pix copia e cola"></textarea>
+      <div id="qr"></div>
+      <p class="hint">Abriu no computador? Aponte a câmera do app do banco para o QR Code.</p>
+      <button type="button" class="link" id="change-amount">Alterar valor</button>
+
+      <form id="note-form" action="https://api.web3forms.com/submit" method="POST">
+        <h3>Quer deixar um recado?</h3>
+        <!-- The Web3Forms access key is public by design: it only says which inbox gets the note. -->
+        <input type="hidden" name="access_key" value="REPLACE-WITH-WEB3FORMS-KEY">
+        <input type="hidden" name="subject" value="Recado do Café Bebê">
+        <input type="hidden" name="gift">
+        <input type="hidden" name="amount">
+        <!-- Honeypot: bots tick it, Web3Forms then drops the submission. -->
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <label for="note-name">Seu nome</label>
+        <input id="note-name" name="name" required autocomplete="name">
+        <label for="note-message">Seu recado</label>
+        <textarea id="note-message" name="message" rows="3"></textarea>
+        <button class="secondary">Enviar recado</button>
+        <p id="note-status" class="error" role="alert"></p>
+        <p class="hint">O recado chega no nosso e-mail pelo serviço Web3Forms.</p>
+      </form>
+      <p id="note-sent" role="status" hidden>Recado enviado. Obrigado!</p>
+    </div>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

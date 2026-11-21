@@ -1,0 +1,353 @@
+/* Palette taken from the colored-pencil artwork (cafebebe_background.jpeg):
+   navy ink for text, cobalt for the one action color, pencil tints for the discs. */
+:root {
+  --paper: #ffffff;
+  --ink: #1d2b5e;
+  --ink-soft: #55608a;
+  --blue: #2c4fc0;
+  --line: #d5dbee;
+  --error: #b3261e;
+  --display: Futura, "Century Gothic", "Avenir Next", "Trebuchet MS", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Lets the hidden attribute win over the display rules below. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+h1,
+h2,
+h3,
+button,
+.gift-name,
+.hosts {
+  font-family: var(--display);
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* Hero */
+
+.hero {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 1rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 15vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  margin: 0;
+}
+
+.hero .hosts {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
+.hero .when {
+  color: var(--ink-soft);
+}
+
+.hero .welcome {
+  margin-top: 1.5rem;
+}
+
+/* Pills: category filter and suggested amounts */
+
+#filters,
+#suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+#filters {
+  padding: 1rem;
+}
+
+#filters button,
+#suggestions button {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+#filters button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* Gift grid: each gift sits on a colored disc, like the shapes in the artwork */
+
+#gifts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 2rem 1rem;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem;
+  list-style: none;
+}
+
+.gift {
+  display: grid;
+  justify-items: center;
+  gap: 0.125rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.disc {
+  display: grid;
+  place-items: center;
+  width: 7rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--disc, var(--line));
+  font-size: 3rem;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gift:hover .disc,
+.gift:focus-visible .disc {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+[data-color="0"] { --disc: #f8b566; }
+[data-color="1"] { --disc: #8fb8f0; }
+[data-color="2"] { --disc: #cbd96a; }
+[data-color="3"] { --disc: #f08a78; }
+[data-color="4"] { --disc: #7fbf8f; }
+[data-color="5"] { --disc: #d68cc4; }
+[data-color="6"] { --disc: #86d3d8; }
+
+.gift .gift-name {
+  margin-top: 0.625rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.gift .gift-description,
+.gift .gift-price {
+  font: 0.875rem/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink-soft);
+}
+
+/* Gift dialog */
+
+dialog {
+  width: min(100% - 2rem, 26rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 1.5rem;
+  border: 0;
+  border-radius: 1.5rem;
+  color: var(--ink);
+  text-align: center;
+}
+
+dialog::backdrop {
+  background: rgb(29 43 94 / 0.5);
+}
+
+dialog .disc {
+  width: 5.5rem;
+  margin: 0 auto;
+  font-size: 2.5rem;
+}
+
+dialog h2 {
+  margin: 0.75rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+dialog h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+dialog p {
+  margin: 0;
+}
+
+dialog > .gift-description {
+  color: var(--ink-soft);
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#amount-form,
+#pay,
+#note-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1.5px solid var(--line);
+  border-radius: 0.75rem;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+#amount {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.primary,
+.secondary {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0 1.25rem;
+  border: 1.5px solid var(--blue);
+  border-radius: 999px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--blue);
+  color: #fff;
+}
+
+.secondary {
+  background: none;
+  color: var(--blue);
+}
+
+.secondary:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.link {
+  justify-self: center;
+  padding: 0.5rem;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pay-title {
+  font-size: 1.25rem;
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.875rem;
+}
+
+.error:empty,
+.hint:empty {
+  display: none;
+}
+
+#load-error {
+  text-align: center;
+}
+
+#pix-code {
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  word-break: break-all;
+  resize: none;
+}
+
+#qr svg {
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto;
+}
+
+#note-form {
+  padding-top: 1.25rem;
+  border-top: 1.5px solid var(--line);
+  text-align: left;
+}
+
+#note-sent {
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disc {
+    transition: none;
+  }
+}
