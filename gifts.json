@@ -96,7 +96,10 @@
       "category": "Alimentação",
       "emoji": "🍼",
       "description": "Para a hora de mamar.",
-      "price": 150
+      "price": 24.98,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B0BWFJL62B",
+      "photo": "https://m.media-amazon.com/images/I/71A-6eDeTtL._AC_SL600_.jpg"
     },
     {
       "id": "bottle-warmer",
