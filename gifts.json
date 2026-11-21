@@ -17,8 +17,9 @@
       "name": "Carrinho de bebê",
       "category": "Passeio",
       "emoji": "🚼",
-      "description": "Para os passeios no parque.",
-      "referencePrice": 1500
+      "description": "Joolz Aer² com moisés, para os passeios no parque.",
+      "url": "https://www.joolz.com/fr/fr/joolz-aer2-avec-nacelle/joolz-aer2-withcot.html",
+      "photo": "https://www.joolz.com/dw/image/v2/BDLP_PRD/on/demandware.static/-/Sites-joolz-master/default/dw8965bbdb/zoom_1200x1800/WP/320053_joolz_aer2_cot_sandytaupe_sp_02.png?sw=650&sh=650&sm=fit"
     },
     {
       "id": "car-seat",

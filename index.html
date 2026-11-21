@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Café Bebê: lista de presentes</title>
+  <title>Café Bébé: lista de presentes</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍼</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="hero">
-    <h1>Café Bebê</h1>
+    <h1 lang="fr">Café Bébé</h1>
     <!-- Placeholders: replace with the real names, date and place. -->
     <p class="hosts">[Nome] e [Nome] esperam você</p>
     <p class="when">[dia, data e horário], em [local]</p>
@@ -37,8 +37,11 @@
   <dialog id="gift-dialog" aria-labelledby="dialog-name">
     <form method="dialog"><button class="close" aria-label="Fechar">×</button></form>
     <div class="disc" aria-hidden="true"></div>
+    <!-- Filled from the gift's "photo" and "url" in gifts.json, when it has them. -->
+    <div id="gift-photo"></div>
     <h2 id="dialog-name" class="gift-name"></h2>
     <p class="gift-description"></p>
+    <a id="gift-link" target="_blank" rel="noopener noreferrer" hidden>Ver o produto na loja</a>
 
     <!-- Step 1: choose the amount. -->
     <form id="amount-form" novalidate>
@@ -65,7 +68,7 @@
         <h3>Quer deixar um recado?</h3>
         <!-- The Web3Forms access key is public by design: it only says which inbox gets the note. -->
         <input type="hidden" name="access_key" value="REPLACE-WITH-WEB3FORMS-KEY">
-        <input type="hidden" name="subject" value="Recado do Café Bebê">
+        <input type="hidden" name="subject" value="Recado do Café Bébé">
         <input type="hidden" name="gift">
         <input type="hidden" name="amount">
         <!-- Honeypot: bots tick it, Web3Forms then drops the submission. -->

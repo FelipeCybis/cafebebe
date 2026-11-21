@@ -29,20 +29,32 @@ let currentGift;
 // Fills the disc, name and description of a gift, in a card or in the dialog.
 function showGift(root, gift, color) {
   root.dataset.color = color;
-  const disc = root.querySelector(".disc");
-  if (gift.photo) {
-    const image = new Image();
-    image.src = gift.photo;
-    image.alt = "";
-    disc.replaceChildren(image);
-  } else {
-    disc.textContent = gift.emoji ?? "🎁";
-  }
+  root.querySelector(".disc").textContent = gift.emoji ?? "🎁";
   root.querySelector(".gift-name").textContent = gift.name;
   root.querySelector(".gift-description").textContent = gift.description ?? "";
 }
 
+// In the dialog, a gift with a "photo" shows it in place of the emoji disc.
+// The photo usually lives on the store's site, so if it stops loading the disc comes back.
+function showPhoto(gift) {
+  const photo = $("#gift-photo");
+  photo.replaceChildren();
+  dialog.classList.toggle("has-photo", Boolean(gift.photo));
+  if (!gift.photo) return;
+  const image = new Image();
+  image.alt = "";
+  image.referrerPolicy = "no-referrer"; // the store does not need to learn this page's address
+  image.addEventListener("error", () => {
+    if (!image.isConnected) return; // another gift was opened meanwhile
+    dialog.classList.remove("has-photo");
+    image.remove();
+  });
+  image.src = gift.photo;
+  photo.append(image);
+}
+
 function showStep(step) {
+  dialog.dataset.step = step; // style.css hides the photo and the store link while paying
   amountForm.hidden = step !== "amount";
   $("#pay").hidden = step !== "pay";
 }
@@ -63,6 +75,9 @@ function updateGenerateButton() {
 function openGift(gift, color) {
   currentGift = gift;
   showGift(dialog, gift, color);
+  showPhoto(gift);
+  $("#gift-link").hidden = !gift.url;
+  if (gift.url) $("#gift-link").href = gift.url;
   amountForm.reset();
   noteForm.reset();
   noteForm.hidden = false;
