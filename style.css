@@ -112,16 +112,118 @@ button,
   color: #fff;
 }
 
-/* Gift grid: each gift sits on a colored disc, like the shapes in the artwork */
+/* Gift carousel: two rows that slide sideways. Each gift sits on a colored disc,
+   like the shapes in the artwork. */
+
+.carousel {
+  --columns: 2.3; /* gifts across one view; the fraction lets the next column peek in */
+  --gap: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 68rem;
+  margin: 0 auto 4rem;
+}
+
+/* On a phone the list is swiped. The arrows come in on wider screens, below. */
+.arrow {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0 0.25rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arrow:not([aria-disabled="true"]):hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* Nothing more on that side. */
+.arrow[aria-disabled="true"] {
+  opacity: 0.25;
+  cursor: default;
+}
 
 #gifts {
+  container-type: inline-size; /* lets a column be a share of this box (cqi) */
+  display: flex;
+  padding: 1rem;
+  overflow-x: auto;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+#gifts::-webkit-scrollbar {
+  display: none;
+}
+
+/* A list that fits in one view does not slide: center it. */
+.carousel:not(.slides) #gifts {
+  justify-content: center;
+}
+
+.gift-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-  gap: 2rem 1rem;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 1rem 1rem 4rem;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100cqi - (var(--columns) - 1) * var(--gap)) / var(--columns));
+  flex: none;
+  gap: 2rem var(--gap);
+  margin: 0;
+  padding: 0;
   list-style: none;
+}
+
+.gift-list li {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 40rem) {
+  .carousel {
+    --columns: 3;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    padding-inline: 1rem;
+  }
+
+  .arrow {
+    display: block;
+  }
+
+  .carousel:not(.slides) .arrow {
+    visibility: hidden;
+  }
+
+  #gifts {
+    padding-inline: 0.5rem;
+    scroll-padding-inline: 0.5rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .carousel {
+    --columns: 4;
+  }
+}
+
+@media (min-width: 56rem) {
+  .carousel {
+    --columns: 5;
+  }
+}
+
+@media (min-width: 68rem) {
+  .carousel {
+    --columns: 6;
+  }
 }
 
 .gift {

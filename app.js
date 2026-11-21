@@ -54,16 +54,29 @@ function showPhoto(gift) {
   photo.append(image);
 }
 
-// Latest rate from a currency to BRL: European Central Bank reference rates, served
-// by frankfurter.dev. One request per currency per visit. Resolves to null if it fails.
-const rates = {};
-function rateToBrl(currency) {
-  rates[currency] ??= fetch(`https://api.frankfurter.dev/v1/latest?base=${currency}&symbols=BRL`)
-    .then((response) => response.json())
-    .then((data) => data.rates.BRL)
-    .catch(() => null);
-  return rates[currency];
+// Latest rate from a currency to BRL. First the European Central Bank reference
+// rate, served by frankfurter.dev. That service has gone down before, so a daily
+// rate file on the jsDelivr CDN is the second try. Resolves to null if both fail.
+async function fetchRateToBrl(currency) {
+  const code = currency.toLowerCase();
+  const sources = [
+    [`https://api.frankfurter.dev/v1/latest?base=${currency}&symbols=BRL`, (data) => data.rates.BRL],
+    [`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${code}.min.json`, (data) => data[code].brl],
+  ];
+  for (const [url, readRate] of sources) {
+    try {
+      const rate = readRate(await (await fetch(url)).json());
+      if (rate > 0) return rate;
+    } catch {
+      // Try the next source.
+    }
+  }
+  return null;
 }
+
+// One lookup per currency per visit.
+const rates = {};
+const rateToBrl = (currency) => (rates[currency] ??= fetchRateToBrl(currency));
 
 // Shows the store price. A price in another currency also gets its value in BRL,
 // added once the rate arrives. Without a rate, the store price stays alone.
@@ -117,17 +130,51 @@ function openGift(gift, color) {
   dialog.showModal();
 }
 
-// Gift grid.
-gifts.forEach((gift, index) => {
-  const item = $("#gift-card").content.firstElementChild.cloneNode(true);
-  const color = index % DISC_COLORS;
-  showGift(item, gift, color);
-  item.dataset.category = gift.category ?? "";
-  item.querySelector("button").addEventListener("click", () => openGift(gift, color));
-  $("#gifts").append(item);
-});
+// Gift carousel: two rows that slide sideways, by swipe or with the arrows.
+const scroller = $("#gifts");
+const list = scroller.querySelector("ul");
 
-// Category filter. A gift without a category shows under every filter.
+// Shows the gifts of one category, or all of them. A gift without a category
+// shows under every filter.
+function renderGifts(category) {
+  list.replaceChildren();
+  gifts.forEach((gift, index) => {
+    if (category && gift.category && gift.category !== category) return;
+    const item = $("#gift-card").content.firstElementChild.cloneNode(true);
+    const color = index % DISC_COLORS;
+    showGift(item, gift, color);
+    item.querySelector("button").addEventListener("click", () => openGift(gift, color));
+    list.append(item);
+  });
+  scroller.scrollLeft = 0;
+  updateArrows();
+}
+
+// The arrows hide when the whole list fits in view, and each one fades when
+// there is nothing more on its side.
+function updateArrows() {
+  const end = scroller.scrollWidth - scroller.clientWidth;
+  $(".carousel").classList.toggle("slides", end > 1);
+  $("#previous").setAttribute("aria-disabled", String(scroller.scrollLeft <= 1));
+  $("#next").setAttribute("aria-disabled", String(scroller.scrollLeft >= end - 1));
+}
+scroller.addEventListener("scroll", updateArrows);
+window.addEventListener("resize", updateArrows);
+
+// The arrows slide by one view of whole columns.
+function slide(direction) {
+  const column = list.firstElementChild.getBoundingClientRect().width;
+  const step = column + parseFloat(getComputedStyle(list).columnGap);
+  const columnsInView = Math.max(1, Math.floor((scroller.clientWidth + 2) / step));
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  scroller.scrollBy({ left: direction * columnsInView * step, behavior: reducedMotion ? "auto" : "smooth" });
+}
+$("#previous").addEventListener("click", () => slide(-1));
+$("#next").addEventListener("click", () => slide(1));
+
+renderGifts("");
+
+// Category filter.
 const categories = [...new Set(gifts.map((gift) => gift.category).filter(Boolean))];
 for (const category of ["", ...categories]) {
   const button = document.createElement("button");
@@ -136,9 +183,7 @@ for (const category of ["", ...categories]) {
   button.setAttribute("aria-pressed", String(!category));
   button.addEventListener("click", () => {
     for (const other of $("#filters").children) other.setAttribute("aria-pressed", String(other === button));
-    for (const item of $("#gifts").children) {
-      item.hidden = Boolean(category && item.dataset.category && item.dataset.category !== category);
-    }
+    renderGifts(category);
   });
   $("#filters").append(button);
 }

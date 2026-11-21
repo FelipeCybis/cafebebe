@@ -18,7 +18,12 @@
   <main>
     <div id="filters" role="group" aria-label="Filtrar por categoria"></div>
     <p id="load-error" class="error" role="alert" hidden>A lista de presentes não carregou. Recarregue a página.</p>
-    <ul id="gifts"></ul>
+    <!-- #gifts is the box that slides sideways. app.js fills the list inside it. -->
+    <div class="carousel">
+      <button type="button" class="arrow" id="previous" aria-label="Presentes anteriores">‹</button>
+      <div id="gifts"><ul class="gift-list"></ul></div>
+      <button type="button" class="arrow" id="next" aria-label="Próximos presentes">›</button>
+    </div>
   </main>
 
   <template id="gift-card">
