@@ -27,7 +27,30 @@ try {
 const { pix, suggestedAmounts, gifts } = data;
 let currentGift;
 
-// Fills the disc, name and description of a gift, in a card or in the dialog.
+// Wires a box that slides sideways to its two arrows. A click slides one view.
+// An arrow fades when there is nothing more on its side, and the parent gets the
+// class "slides" only when the content does not fit. Returns the function that
+// refreshes this state after the content changes.
+function connectArrows(scroller, previous, next) {
+  const update = () => {
+    const end = scroller.scrollWidth - scroller.clientWidth;
+    scroller.parentElement.classList.toggle("slides", end > 1);
+    previous.setAttribute("aria-disabled", String(scroller.scrollLeft <= 1));
+    next.setAttribute("aria-disabled", String(scroller.scrollLeft >= end - 1));
+  };
+  const slide = (direction) => {
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    scroller.scrollBy({ left: direction * scroller.clientWidth, behavior: reducedMotion ? "auto" : "smooth" });
+  };
+  previous.addEventListener("click", () => slide(-1));
+  next.addEventListener("click", () => slide(1));
+  scroller.addEventListener("scroll", update);
+  window.addEventListener("resize", update);
+  return update;
+}
+
+// Fills the disc, name and description of a gift: in a card, in an option slide of
+// the dialog, or in the short summary shown while paying.
 function showGift(root, gift, color) {
   root.dataset.color = color;
   root.querySelector(".disc").textContent = gift.emoji ?? "🎁";
@@ -35,23 +58,19 @@ function showGift(root, gift, color) {
   root.querySelector(".gift-description").textContent = gift.description ?? "";
 }
 
-// In the dialog, a gift with a "photo" shows it in place of the emoji disc.
-// The photo usually lives on the store's site, so if it stops loading the disc comes back.
-function showPhoto(gift) {
-  const photo = $("#gift-photo");
-  photo.replaceChildren();
-  dialog.classList.toggle("has-photo", Boolean(gift.photo));
-  if (!gift.photo) return;
+// Shows the store photo of an option in place of the emoji disc. The photo usually
+// lives on the store's site, so if it stops loading the disc comes back.
+function showPhoto(slide, url) {
   const image = new Image();
   image.alt = "";
   image.referrerPolicy = "no-referrer"; // the store does not need to learn this page's address
   image.addEventListener("error", () => {
-    if (!image.isConnected) return; // another gift was opened meanwhile
-    dialog.classList.remove("has-photo");
+    slide.classList.remove("has-photo");
     image.remove();
   });
-  image.src = gift.photo;
-  photo.append(image);
+  image.src = url;
+  slide.querySelector(".option-media").append(image);
+  slide.classList.add("has-photo");
 }
 
 // Latest rate from a currency to BRL. First the European Central Bank reference
@@ -78,26 +97,51 @@ async function fetchRateToBrl(currency) {
 const rates = {};
 const rateToBrl = (currency) => (rates[currency] ??= fetchRateToBrl(currency));
 
-// Shows the store price. A price in another currency also gets its value in BRL,
-// added once the rate arrives. Without a rate, the store price stays alone.
-async function showPrice(gift) {
-  const line = $("#gift-price");
-  line.textContent = "";
-  if (!gift.price) return;
-  const currency = gift.currency ?? "BRL";
-  const price = new Intl.NumberFormat("pt-BR", { style: "currency", currency }).format(gift.price);
+// Writes the store price of an option. A price in another currency also gets its
+// value in BRL, added once the rate arrives. Without a rate, the store price stays alone.
+async function showPrice(line, option) {
+  if (!option.price) return;
+  const currency = option.currency ?? "BRL";
+  const price = new Intl.NumberFormat("pt-BR", { style: "currency", currency }).format(option.price);
   line.textContent = `Custa ${price}`;
   if (currency === "BRL") return;
   const rate = await rateToBrl(currency);
-  if (rate && currentGift === gift) {
-    line.textContent = `Custa ${price}, cerca de ${brlRounded.format(gift.price * rate)}`;
-  }
+  if (rate) line.textContent = `Custa ${price}, cerca de ${brlRounded.format(option.price * rate)}`;
 }
 
+// The top of the dialog while choosing the amount: one slide per product option of
+// the gift. A gift lists its options in "items". Without "items", the gift itself is
+// its only option. More than one option slides sideways.
+const options = $("#gift-options");
+const updateOptionArrows = connectArrows(options, $("#previous-option"), $("#next-option"));
+
+function optionSlide(gift, option, color) {
+  const slide = $("#gift-option").content.firstElementChild.cloneNode(true);
+  showGift(slide, gift, color);
+  if (option.photo) showPhoto(slide, option.photo);
+  showPrice(slide.querySelector(".option-price"), option);
+  const link = slide.querySelector(".option-link");
+  link.hidden = !option.url;
+  if (option.url) link.href = option.url;
+  return slide;
+}
+
+// "Opção 2 de 4", only when the gift has more than one option.
+function updateOptionCount() {
+  const count = options.children.length;
+  const current = Math.round(options.scrollLeft / options.clientWidth) + 1;
+  $("#option-count").textContent = count > 1 ? `Opção ${current} de ${count}` : "";
+}
+options.addEventListener("scroll", updateOptionCount);
+
 function showStep(step) {
-  dialog.dataset.step = step; // style.css hides the photo, price and store link while paying
+  dialog.dataset.step = step; // style.css swaps the option slides for a short summary while paying
   amountForm.hidden = step !== "amount";
   $("#pay").hidden = step !== "pay";
+  if (step === "amount") {
+    updateOptionArrows();
+    updateOptionCount();
+  }
 }
 
 // Returns the typed amount, or null if it is not a valid amount within the limits.
@@ -115,24 +159,40 @@ function updateGenerateButton() {
 
 function openGift(gift, color) {
   currentGift = gift;
-  showGift(dialog, gift, color);
-  showPhoto(gift);
-  showPrice(gift);
-  $("#gift-link").hidden = !gift.url;
-  if (gift.url) $("#gift-link").href = gift.url;
+  showGift($("#gift-summary"), gift, color);
+  options.replaceChildren(...(gift.items ?? [gift]).map((option) => optionSlide(gift, option, color)));
   amountForm.reset();
   noteForm.reset();
   noteForm.hidden = false;
   $("#note-sent").hidden = true;
   $("#note-status").textContent = "";
   updateGenerateButton();
+  dialog.showModal(); // first, so that showStep can measure the option slides
+  options.scrollLeft = 0;
   showStep("amount");
-  dialog.showModal();
 }
+
+// A click outside the dialog closes it. Such a click lands on the dialog element
+// itself (its backdrop), outside its box. The press must start outside as well, so
+// dragging a text selection out of the dialog does not close it.
+let pressedOutside = false;
+function isOutsideDialog(event) {
+  const box = dialog.getBoundingClientRect();
+  const insideBox =
+    event.clientX >= box.left && event.clientX <= box.right && event.clientY >= box.top && event.clientY <= box.bottom;
+  return event.target === dialog && !insideBox;
+}
+dialog.addEventListener("pointerdown", (event) => {
+  pressedOutside = isOutsideDialog(event);
+});
+dialog.addEventListener("click", (event) => {
+  if (pressedOutside && isOutsideDialog(event)) dialog.close();
+});
 
 // Gift carousel: two rows that slide sideways, by swipe or with the arrows.
 const scroller = $("#gifts");
 const list = scroller.querySelector("ul");
+const updateGiftArrows = connectArrows(scroller, $("#previous"), $("#next"));
 
 // Shows the gifts of one category, or all of them. A gift without a category
 // shows under every filter.
@@ -147,30 +207,8 @@ function renderGifts(category) {
     list.append(item);
   });
   scroller.scrollLeft = 0;
-  updateArrows();
+  updateGiftArrows();
 }
-
-// The arrows hide when the whole list fits in view, and each one fades when
-// there is nothing more on its side.
-function updateArrows() {
-  const end = scroller.scrollWidth - scroller.clientWidth;
-  $(".carousel").classList.toggle("slides", end > 1);
-  $("#previous").setAttribute("aria-disabled", String(scroller.scrollLeft <= 1));
-  $("#next").setAttribute("aria-disabled", String(scroller.scrollLeft >= end - 1));
-}
-scroller.addEventListener("scroll", updateArrows);
-window.addEventListener("resize", updateArrows);
-
-// The arrows slide by one view of whole columns.
-function slide(direction) {
-  const column = list.firstElementChild.getBoundingClientRect().width;
-  const step = column + parseFloat(getComputedStyle(list).columnGap);
-  const columnsInView = Math.max(1, Math.floor((scroller.clientWidth + 2) / step));
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  scroller.scrollBy({ left: direction * columnsInView * step, behavior: reducedMotion ? "auto" : "smooth" });
-}
-$("#previous").addEventListener("click", () => slide(-1));
-$("#next").addEventListener("click", () => slide(1));
 
 renderGifts("");
 

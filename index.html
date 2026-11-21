@@ -21,7 +21,7 @@
     <!-- #gifts is the box that slides sideways. app.js fills the list inside it. -->
     <div class="carousel">
       <button type="button" class="arrow" id="previous" aria-label="Presentes anteriores">‹</button>
-      <div id="gifts"><ul class="gift-list"></ul></div>
+      <div id="gifts" class="scroller"><ul class="gift-list"></ul></div>
       <button type="button" class="arrow" id="next" aria-label="Próximos presentes">›</button>
     </div>
   </main>
@@ -36,15 +36,34 @@
     </li>
   </template>
 
+  <!-- One product option of a gift: store photo (or the emoji disc), price and link. -->
+  <template id="gift-option">
+    <div class="option">
+      <div class="option-media"><span class="disc" aria-hidden="true"></span></div>
+      <p class="gift-name"></p>
+      <p class="gift-description"></p>
+      <p class="option-price"></p>
+      <a class="option-link" target="_blank" rel="noopener noreferrer" hidden>Ver o produto na loja</a>
+    </div>
+  </template>
+
+  <!-- No close button: a click outside the dialog or the Esc key closes it (see app.js). -->
   <dialog id="gift-dialog" aria-labelledby="dialog-name">
-    <form method="dialog"><button class="close" aria-label="Fechar">×</button></form>
-    <div class="disc" aria-hidden="true"></div>
-    <!-- Filled from the gift's "photo", "price" and "url" in gifts.json, when it has them. -->
-    <div id="gift-photo"></div>
-    <h2 id="dialog-name" class="gift-name"></h2>
-    <p class="gift-description"></p>
-    <p id="gift-price"></p>
-    <a id="gift-link" target="_blank" rel="noopener noreferrer" hidden>Ver o produto na loja</a>
+    <!-- Step 1, top: one slide per product option of the gift. With more than one
+         option, the slides move sideways and the arrows and the counter show. -->
+    <div class="options">
+      <button type="button" class="arrow" id="previous-option" aria-label="Opção anterior">‹</button>
+      <div id="gift-options" class="scroller"></div>
+      <button type="button" class="arrow" id="next-option" aria-label="Próxima opção">›</button>
+    </div>
+    <p id="option-count" class="hint"></p>
+
+    <!-- Step 2, top: the gift in short. -->
+    <div id="gift-summary">
+      <div class="disc" aria-hidden="true"></div>
+      <h2 id="dialog-name" class="gift-name"></h2>
+      <p class="gift-description"></p>
+    </div>
 
     <!-- Step 1: choose the amount. -->
     <form id="amount-form" novalidate>

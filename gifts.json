@@ -147,11 +147,36 @@
     },
     {
       "id": "high-chair",
-      "name": "Cadeira de alimentação",
+      "name": "Cadeira evolutiva",
       "category": "Alimentação",
-      "emoji": "🥣",
-      "description": "Para as primeiras papinhas.",
-      "price": 600
+      "emoji": "🪑",
+      "description": "Para crescer junto com o bebê.",
+      "items": [
+        {
+          "price": 139,
+          "currency": "EUR",
+          "url": "https://fr.deryan.com/products/odin-luxe-houten-meegroeistoel-kinderstoel-met-bouncer-inclusief-eetblad-verstelbare-kinderstoel-wood-nougat",
+          "photo": "https://cdn.shopify.com/s/files/1/0774/0329/1986/files/OdinWood_bouncernougat_1.jpg?v=1794580302&width=600"
+        },
+        {
+          "price": 119,
+          "currency": "EUR",
+          "url": "https://fr.deryan.com/products/oak-luxe-kinderstoel-met-bouncer-donkerbruin",
+          "photo": "https://cdn.shopify.com/s/files/1/0774/0329/1986/files/OakBrown_Bouncer1_0f71377c-e0f9-40fa-a5d3-33a23136c39e.jpg?v=1794580157&width=600"
+        },
+        {
+          "price": 159.9,
+          "currency": "EUR",
+          "url": "https://www.vertbaudet.fr/chaise-haute-evolutive-born-up-avec-transat-deperlant-et-inclinable-roba-style-naturel-vert-givre.htm?ProductId=A0000FP82&FiltreCouleur=HGT2&FiltreTaille=TU",
+          "photo": "https://media.vertbaudet.fr/Pictures/vertbaudet/565163/chaise-haute-evolutive-born-up-avec-transat-deperlant-et-inclinable-roba-style.jpg"
+        },
+        {
+          "price": 189.9,
+          "currency": "EUR",
+          "url": "https://www.amazon.fr/-/en/dp/B0DJT9C1JV",
+          "photo": "https://m.media-amazon.com/images/I/61cOdT8hFmL._AC_SL600_.jpg"
+        }
+      ]
     }
   ]
 }

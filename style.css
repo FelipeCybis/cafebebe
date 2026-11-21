@@ -150,18 +150,23 @@ button,
   cursor: default;
 }
 
-#gifts {
-  container-type: inline-size; /* lets a column be a share of this box (cqi) */
+/* A box that slides sideways and stops on its items: the gift carousel and the
+   product options in the dialog. */
+.scroller {
   display: flex;
-  padding: 1rem;
   overflow-x: auto;
-  scroll-padding-inline: 1rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 
-#gifts::-webkit-scrollbar {
+.scroller::-webkit-scrollbar {
   display: none;
+}
+
+#gifts {
+  container-type: inline-size; /* lets a column be a share of this box (cqi) */
+  padding: 1rem;
+  scroll-padding-inline: 1rem;
 }
 
 /* A list that fits in one view does not slide: center it. */
@@ -289,6 +294,14 @@ dialog {
   text-align: center;
 }
 
+/* A tap outside is the way to close the dialog on a phone, so keep a strip of
+   backdrop above and below it that is tall enough to tap. */
+@media (max-width: 39.99rem) {
+  dialog {
+    max-height: calc(100dvh - 6rem);
+  }
+}
+
 dialog::backdrop {
   background: rgb(29 43 94 / 0.5);
 }
@@ -299,9 +312,11 @@ dialog .disc {
   font-size: 2.5rem;
 }
 
-dialog h2 {
+dialog h2,
+.option .gift-name {
   margin: 0.75rem 0 0;
   font-size: 1.5rem;
+  font-weight: bold;
   line-height: 1.2;
 }
 
@@ -314,47 +329,72 @@ dialog p {
   margin: 0;
 }
 
-dialog > .gift-description {
+dialog .gift-description {
   color: var(--ink-soft);
 }
 
+/* Product options: one slide each, as wide as the dialog. */
+.options {
+  position: relative;
+}
+
+.option {
+  flex: none;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
 /* Store photo: a fixed height, so the dialog does not jump when it loads. */
-#gift-photo img {
+.option-media img {
   display: block;
   width: 100%;
   height: 12rem;
   object-fit: contain;
 }
 
-#gift-link {
+.option.has-photo .disc {
+  display: none;
+}
+
+.option-link {
   display: inline-block;
   margin-top: 0.25rem;
   color: var(--blue);
   font-size: 0.9375rem;
 }
 
-/* The photo replaces the disc while choosing the amount. While paying, the disc
-   returns and the photo, price and link leave, so the copy button stays near the top. */
-dialog.has-photo[data-step="amount"] > .disc,
-dialog[data-step="pay"] #gift-photo,
-dialog[data-step="pay"] #gift-price,
-dialog[data-step="pay"] #gift-link {
+/* The arrows sit over the sides of the photo, and only when there is more than one option. */
+.options .arrow {
+  position: absolute;
+  top: 4.625rem;
+  z-index: 1;
+}
+
+.options.slides .arrow {
+  display: block;
+}
+
+.options:not(.slides) .arrow {
   display: none;
 }
 
-.close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--ink-soft);
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
+#previous-option {
+  left: -0.75rem;
+}
+
+#next-option {
+  right: -0.75rem;
+}
+
+#option-count {
+  margin-top: 0.5rem;
+}
+
+/* While paying, a short summary replaces the options, so the copy button stays near the top. */
+dialog[data-step="amount"] #gift-summary,
+dialog[data-step="pay"] .options,
+dialog[data-step="pay"] #option-count {
+  display: none;
 }
 
 #amount-form,
