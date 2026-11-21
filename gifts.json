@@ -41,7 +41,26 @@
       "category": "Quarto",
       "emoji": "🛏️",
       "description": "Para as noites de sono.",
-      "price": 1200
+      "items": [
+        {
+          "price": 589,
+          "currency": "EUR",
+          "url": "https://www.nanny-care.com/lit-bebe/997-887-lit-bebe-evolutif-7-en-1-charlie-waldin-naturel.html#/330-couleur-naturel",
+          "photo": "https://www.nanny-care.com/69264-large_default/lit-bebe-evolutif-7-en-1-charlie-waldin-naturel.jpg"
+        },
+        {
+          "price": 159.9,
+          "currency": "EUR",
+          "url": "https://www.madeinbebe.com/boutique/fr/at4--lit-bebe-coulissant-60x120-essentiel-hetre-verni-at4/a281586",
+          "photo": "https://www.madeinbebe.com/boutique/uploads/articles/zoom/at4--lit-bebe-coulissant-60x120-essentiel-hetre-verni-at4_A.jpg"
+        },
+        {
+          "price": 530.1,
+          "currency": "EUR",
+          "url": "https://www.amazon.fr/-/en/dp/B0FZMBY43X",
+          "photo": "https://m.media-amazon.com/images/I/71ZsaBgC9GL._AC_SL600_.jpg"
+        }
+      ]
     },
     {
       "id": "baby-monitor",
