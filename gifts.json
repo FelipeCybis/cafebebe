@@ -49,7 +49,10 @@
       "category": "Quarto",
       "emoji": "📹",
       "description": "Para ficar de olho no soninho.",
-      "price": 400
+      "price": 199.99,
+      "currency": "EUR",
+      "url": "https://fr.momcozy.com/en/products/5-inch-dual-mode-smart-baby-monitor-bm04",
+      "photo": "https://cdn.shopify.com/s/files/1/0740/4811/0810/files/01_4c42530c-411e-49a8-86a5-729bfa32119c.jpg?v=1777963391&width=600"
     },
     {
       "id": "diapers",
@@ -64,7 +67,10 @@
       "category": "Cuidados",
       "emoji": "🛁",
       "description": "Para a hora do banho.",
-      "price": 250
+      "price": 71.04,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B0DP5HSWLK",
+      "photo": "https://m.media-amazon.com/images/I/51dfcVfJ-FL._AC_SL600_.jpg"
     },
     {
       "id": "clothes",
@@ -72,6 +78,17 @@
       "category": "Cuidados",
       "emoji": "🧦",
       "description": "Para os primeiros meses."
+    },
+    {
+      "id": "thermometer",
+      "name": "Termômetro",
+      "category": "Cuidados",
+      "emoji": "🌡️",
+      "description": "Para os dias de febre.",
+      "price": 20.99,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B01IBL6MPQ",
+      "photo": "https://m.media-amazon.com/images/I/61b2L4XoB+L._AC_SL600_.jpg"
     },
     {
       "id": "bottles",
@@ -102,6 +119,28 @@
       "currency": "EUR",
       "url": "https://www.amazon.fr/-/en/dp/B0GWH4W3DQ",
       "photo": "https://m.media-amazon.com/images/I/61LIaWx+kIL._AC_SL600_.jpg"
+    },
+    {
+      "id": "bottle-sterilizer",
+      "name": "Kit para esterilizar mamadeira",
+      "category": "Alimentação",
+      "emoji": "✨",
+      "description": "Para mamadeiras sempre limpinhas.",
+      "price": 69.99,
+      "currency": "EUR",
+      "url": "https://fr.momcozy.com/en/products/momcozy-4-in-1-compact-bottle-sterilizer-and-dryer",
+      "photo": "https://cdn.shopify.com/s/files/1/0740/4811/0810/files/1_ebb5dee1-8308-490e-9985-2a794cf4356a.jpg?v=1777304752&width=600"
+    },
+    {
+      "id": "bottle-cleaning-kit",
+      "name": "Kit para lavar mamadeira",
+      "category": "Alimentação",
+      "emoji": "🧽",
+      "description": "Para lavar as mamadeiras em qualquer lugar.",
+      "price": 13.59,
+      "currency": "EUR",
+      "url": "https://www.amazon.fr/-/en/dp/B0DFM9SQWC",
+      "photo": "https://m.media-amazon.com/images/I/61-Qg+kAxkL._AC_SL600_.jpg"
     },
     {
       "id": "high-chair",
