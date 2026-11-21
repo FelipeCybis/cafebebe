@@ -11,9 +11,8 @@
 <body>
   <header class="hero">
     <h1 lang="fr">Café Bébé</h1>
-    <!-- Placeholders: replace with the real names, date and place. -->
-    <p class="hosts">[Nome] e [Nome] esperam você</p>
-    <p class="when">[dia, data e horário], em [local]</p>
+    <p class="hosts">Julia &amp; Felipe convidam</p>
+    <p class="when">20 de dezembro às 15h</p>
   </header>
 
   <main>
@@ -28,7 +27,6 @@
         <span class="disc" aria-hidden="true"></span>
         <span class="gift-name"></span>
         <span class="gift-description"></span>
-        <span class="gift-price"></span>
       </button>
     </li>
   </template>
@@ -36,10 +34,11 @@
   <dialog id="gift-dialog" aria-labelledby="dialog-name">
     <form method="dialog"><button class="close" aria-label="Fechar">×</button></form>
     <div class="disc" aria-hidden="true"></div>
-    <!-- Filled from the gift's "photo" and "url" in gifts.json, when it has them. -->
+    <!-- Filled from the gift's "photo", "price" and "url" in gifts.json, when it has them. -->
     <div id="gift-photo"></div>
     <h2 id="dialog-name" class="gift-name"></h2>
     <p class="gift-description"></p>
+    <p id="gift-price"></p>
     <a id="gift-link" target="_blank" rel="noopener noreferrer" hidden>Ver o produto na loja</a>
 
     <!-- Step 1: choose the amount. -->

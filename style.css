@@ -170,8 +170,7 @@ button,
   line-height: 1.25;
 }
 
-.gift .gift-description,
-.gift .gift-price {
+.gift .gift-description {
   font: 0.875rem/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color: var(--ink-soft);
 }
@@ -232,10 +231,11 @@ dialog > .gift-description {
   font-size: 0.9375rem;
 }
 
-/* The photo replaces the disc while choosing the amount. While paying, the
-   disc returns and the photo and link leave, so the copy button stays near the top. */
+/* The photo replaces the disc while choosing the amount. While paying, the disc
+   returns and the photo, price and link leave, so the copy button stays near the top. */
 dialog.has-photo[data-step="amount"] > .disc,
 dialog[data-step="pay"] #gift-photo,
+dialog[data-step="pay"] #gift-price,
 dialog[data-step="pay"] #gift-link {
   display: none;
 }

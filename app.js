@@ -9,6 +9,7 @@ const PLACEHOLDER_KEY = "REPLACE-WITH-PIX-KEY";
 const DISC_COLORS = 7;
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const brlRounded = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 const $ = (selector) => document.querySelector(selector);
 
 const dialog = $("#gift-dialog");
@@ -53,8 +54,35 @@ function showPhoto(gift) {
   photo.append(image);
 }
 
+// Latest rate from a currency to BRL: European Central Bank reference rates, served
+// by frankfurter.dev. One request per currency per visit. Resolves to null if it fails.
+const rates = {};
+function rateToBrl(currency) {
+  rates[currency] ??= fetch(`https://api.frankfurter.dev/v1/latest?base=${currency}&symbols=BRL`)
+    .then((response) => response.json())
+    .then((data) => data.rates.BRL)
+    .catch(() => null);
+  return rates[currency];
+}
+
+// Shows the store price. A price in another currency also gets its value in BRL,
+// added once the rate arrives. Without a rate, the store price stays alone.
+async function showPrice(gift) {
+  const line = $("#gift-price");
+  line.textContent = "";
+  if (!gift.price) return;
+  const currency = gift.currency ?? "BRL";
+  const price = new Intl.NumberFormat("pt-BR", { style: "currency", currency }).format(gift.price);
+  line.textContent = `Custa ${price}`;
+  if (currency === "BRL") return;
+  const rate = await rateToBrl(currency);
+  if (rate && currentGift === gift) {
+    line.textContent = `Custa ${price}, cerca de ${brlRounded.format(gift.price * rate)}`;
+  }
+}
+
 function showStep(step) {
-  dialog.dataset.step = step; // style.css hides the photo and the store link while paying
+  dialog.dataset.step = step; // style.css hides the photo, price and store link while paying
   amountForm.hidden = step !== "amount";
   $("#pay").hidden = step !== "pay";
 }
@@ -76,6 +104,7 @@ function openGift(gift, color) {
   currentGift = gift;
   showGift(dialog, gift, color);
   showPhoto(gift);
+  showPrice(gift);
   $("#gift-link").hidden = !gift.url;
   if (gift.url) $("#gift-link").href = gift.url;
   amountForm.reset();
@@ -94,9 +123,6 @@ gifts.forEach((gift, index) => {
   const color = index % DISC_COLORS;
   showGift(item, gift, color);
   item.dataset.category = gift.category ?? "";
-  if (gift.referencePrice) {
-    item.querySelector(".gift-price").textContent = `Custa uns ${brl.format(gift.referencePrice)}`;
-  }
   item.querySelector("button").addEventListener("click", () => openGift(gift, color));
   $("#gifts").append(item);
 });

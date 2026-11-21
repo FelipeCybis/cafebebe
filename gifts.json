@@ -4,7 +4,11 @@
     "name": "NAME AS IN THE BANK",
     "city": "CITY"
   },
-  "suggestedAmounts": [50, 100, 200],
+  "suggestedAmounts": [
+    50,
+    100,
+    200
+  ],
   "gifts": [
     {
       "id": "any",
@@ -17,7 +21,9 @@
       "name": "Carrinho de bebê",
       "category": "Passeio",
       "emoji": "🚼",
-      "description": "Joolz Aer² com moisés, para os passeios no parque.",
+      "description": "Para os passeios no parque.",
+      "price": 682.2,
+      "currency": "EUR",
       "url": "https://www.joolz.com/fr/fr/joolz-aer2-avec-nacelle/joolz-aer2-withcot.html",
       "photo": "https://www.joolz.com/dw/image/v2/BDLP_PRD/on/demandware.static/-/Sites-joolz-master/default/dw8965bbdb/zoom_1200x1800/WP/320053_joolz_aer2_cot_sandytaupe_sp_02.png?sw=650&sh=650&sm=fit"
     },
@@ -27,7 +33,7 @@
       "category": "Passeio",
       "emoji": "🚗",
       "description": "Para viajar em segurança.",
-      "referencePrice": 900
+      "price": 900
     },
     {
       "id": "crib",
@@ -35,7 +41,7 @@
       "category": "Quarto",
       "emoji": "🛏️",
       "description": "Para as noites de sono.",
-      "referencePrice": 1200
+      "price": 1200
     },
     {
       "id": "baby-monitor",
@@ -43,7 +49,7 @@
       "category": "Quarto",
       "emoji": "📹",
       "description": "Para ficar de olho no soninho.",
-      "referencePrice": 400
+      "price": 400
     },
     {
       "id": "diapers",
@@ -58,7 +64,7 @@
       "category": "Cuidados",
       "emoji": "🛁",
       "description": "Para a hora do banho.",
-      "referencePrice": 250
+      "price": 250
     },
     {
       "id": "clothes",
@@ -73,7 +79,7 @@
       "category": "Alimentação",
       "emoji": "🍼",
       "description": "Para a hora de mamar.",
-      "referencePrice": 150
+      "price": 150
     },
     {
       "id": "high-chair",
@@ -81,7 +87,7 @@
       "category": "Alimentação",
       "emoji": "🥣",
       "description": "Para as primeiras papinhas.",
-      "referencePrice": 600
+      "price": 600
     },
     {
       "id": "books",
