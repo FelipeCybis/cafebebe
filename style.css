@@ -1,7 +1,7 @@
 /* Palette taken from the colored-pencil artwork (cafebebe_background.jpeg):
    navy ink for text, cobalt for the actions in the dialog, pencil tints for the themes. */
 :root {
-  --paper: rgb(234 239 253); /* the page: a pale blue. Cards and discs that sit on it are white. */
+  --paper: rgb(224 229 216); /* the page: a pale sage. Cards and discs that sit on it are white. */
   --ink: #1d2b5e;
   --ink-soft: #55608a;
   --blue: #2c4fc0;
