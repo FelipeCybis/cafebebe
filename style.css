@@ -1,7 +1,7 @@
 /* Palette taken from the colored-pencil artwork (cafebebe_background.jpeg):
    navy ink for text, cobalt for the actions in the dialog, pencil tints for the themes. */
 :root {
-  --paper: #ffffff;
+  --paper: rgb(234 239 253); /* the page: a pale blue. Cards and discs that sit on it are white. */
   --ink: #1d2b5e;
   --ink-soft: #55608a;
   --blue: #2c4fc0;
@@ -100,7 +100,7 @@ button,
   margin: 1.5rem auto 0;
   padding: 1.25rem 1.5rem;
   border-radius: 1.5rem;
-  background: var(--paper);
+  background: #fff;
 }
 
 .welcome p + p {
@@ -165,7 +165,7 @@ button,
 
 .theme .disc {
   grid-area: disc;
-  background: var(--paper);
+  background: #fff;
 }
 
 /* The disc tips over while the pointer is on the button of its card. */
