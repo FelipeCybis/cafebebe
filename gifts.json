@@ -9,192 +9,58 @@
     100,
     200
   ],
-  "gifts": [
+  "themes": [
     {
-      "id": "any",
-      "name": "Contribuição livre",
-      "emoji": "🎁",
-      "description": "Para o que o bebê precisar."
-    },
-    {
-      "id": "stroller",
-      "name": "Carrinho de bebê",
-      "category": "Passeio",
-      "emoji": "🚼",
+      "id": "outings",
+      "name": "Passeio",
+      "emoji": "🛺",
+      "color": "lime",
       "description": "Para os passeios no parque.",
-      "price": 682.2,
-      "currency": "EUR",
-      "url": "https://www.joolz.com/fr/fr/joolz-aer2-avec-nacelle/joolz-aer2-withcot.html",
-      "photo": "https://www.joolz.com/dw/image/v2/BDLP_PRD/on/demandware.static/-/Sites-joolz-master/default/dw8965bbdb/zoom_1200x1800/WP/320053_joolz_aer2_cot_sandytaupe_sp_02.png?sw=650&sh=650&sm=fit"
-    },
-    {
-      "id": "car-seat",
-      "name": "Cadeirinha para o carro",
-      "category": "Passeio",
-      "emoji": "🚗",
-      "description": "Para viajar em segurança.",
-      "price": 900
-    },
-    {
-      "id": "crib",
-      "name": "Berço",
-      "category": "Quarto",
-      "emoji": "🛏️",
-      "description": "Para as noites de sono.",
-      "items": [
-        {
-          "price": 589,
-          "currency": "EUR",
-          "url": "https://www.nanny-care.com/lit-bebe/997-887-lit-bebe-evolutif-7-en-1-charlie-waldin-naturel.html#/330-couleur-naturel",
-          "photo": "https://www.nanny-care.com/69264-large_default/lit-bebe-evolutif-7-en-1-charlie-waldin-naturel.jpg"
-        },
-        {
-          "price": 159.9,
-          "currency": "EUR",
-          "url": "https://www.madeinbebe.com/boutique/fr/at4--lit-bebe-coulissant-60x120-essentiel-hetre-verni-at4/a281586",
-          "photo": "https://www.madeinbebe.com/boutique/uploads/articles/zoom/at4--lit-bebe-coulissant-60x120-essentiel-hetre-verni-at4_A.jpg"
-        },
-        {
-          "price": 530.1,
-          "currency": "EUR",
-          "url": "https://www.amazon.fr/-/en/dp/B0FZMBY43X",
-          "photo": "https://m.media-amazon.com/images/I/71ZsaBgC9GL._AC_SL600_.jpg"
-        }
+      "gifts": [
+        "Cadeirinha para o carro",
+        "Carrinho de bebê",
+        "Canguru",
+        "Saco de inverno para carrinho"
       ]
     },
     {
-      "id": "baby-monitor",
-      "name": "Babá eletrônica",
-      "category": "Quarto",
-      "emoji": "📹",
-      "description": "Para ficar de olho no soninho.",
-      "price": 199.99,
-      "currency": "EUR",
-      "url": "https://fr.momcozy.com/en/products/5-inch-dual-mode-smart-baby-monitor-bm04",
-      "photo": "https://cdn.shopify.com/s/files/1/0740/4811/0810/files/01_4c42530c-411e-49a8-86a5-729bfa32119c.jpg?v=1777963391&width=600"
-    },
-    {
-      "id": "diapers",
-      "name": "Fraldas",
-      "category": "Cuidados",
-      "emoji": "🧷",
-      "description": "Nunca são demais."
-    },
-    {
-      "id": "bathtub",
-      "name": "Banheira",
-      "category": "Cuidados",
+      "id": "bath-care",
+      "name": "Banho e cuidado",
       "emoji": "🛁",
-      "description": "Para a hora do banho.",
-      "price": 71.04,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B0DP5HSWLK",
-      "photo": "https://m.media-amazon.com/images/I/51dfcVfJ-FL._AC_SL600_.jpg"
+      "color": "blue",
+      "description": "Para o banho e os cuidados do dia a dia.",
+      "gifts": [
+        "Banheira",
+        "Aspirador nasal",
+        "Cortador de unha",
+        "Termômetro",
+        "Trocador",
+        "Fraldas"
+      ]
     },
     {
-      "id": "clothes",
-      "name": "Roupinhas",
-      "category": "Cuidados",
-      "emoji": "🧦",
-      "description": "Para os primeiros meses."
-    },
-    {
-      "id": "thermometer",
-      "name": "Termômetro",
-      "category": "Cuidados",
-      "emoji": "🌡️",
-      "description": "Para os dias de febre.",
-      "price": 20.99,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B01IBL6MPQ",
-      "photo": "https://m.media-amazon.com/images/I/61b2L4XoB+L._AC_SL600_.jpg"
-    },
-    {
-      "id": "bottles",
-      "name": "Mamadeiras",
-      "category": "Alimentação",
+      "id": "feeding",
+      "name": "Alimentação",
       "emoji": "🍼",
-      "description": "Para a hora de mamar.",
-      "price": 24.98,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B0BWFJL62B",
-      "photo": "https://m.media-amazon.com/images/I/71A-6eDeTtL._AC_SL600_.jpg"
+      "color": "orange",
+      "description": "Para a hora de mamar e as primeiras papinhas.",
+      "gifts": [
+        "Cadeirinha evolutiva",
+        "Esterilizador de mamadeira",
+        "Aquecedor de mamadeira",
+        "Kit de limpeza para mamadeira"
+      ]
     },
     {
-      "id": "bottle-warmer",
-      "name": "Aquecedor de mamadeira",
-      "category": "Alimentação",
-      "emoji": "♨️",
-      "description": "Para a mamadeira na temperatura certa.",
-      "price": 29.99,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B084PMMS2H",
-      "photo": "https://m.media-amazon.com/images/I/710imLQ+kJL._AC_SL600_.jpg"
-    },
-    {
-      "id": "portable-bottle-warmer",
-      "name": "Aquecedor de mamadeira portátil",
-      "category": "Alimentação",
-      "emoji": "🎒",
-      "description": "Para a mamadeira quentinha nos passeios.",
-      "price": 71.99,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B0GWH4W3DQ",
-      "photo": "https://m.media-amazon.com/images/I/61LIaWx+kIL._AC_SL600_.jpg"
-    },
-    {
-      "id": "bottle-sterilizer",
-      "name": "Kit para esterilizar mamadeira",
-      "category": "Alimentação",
-      "emoji": "✨",
-      "description": "Para mamadeiras sempre limpinhas.",
-      "price": 69.99,
-      "currency": "EUR",
-      "url": "https://fr.momcozy.com/en/products/momcozy-4-in-1-compact-bottle-sterilizer-and-dryer",
-      "photo": "https://cdn.shopify.com/s/files/1/0740/4811/0810/files/1_ebb5dee1-8308-490e-9985-2a794cf4356a.jpg?v=1777304752&width=600"
-    },
-    {
-      "id": "bottle-cleaning-kit",
-      "name": "Kit para lavar mamadeira",
-      "category": "Alimentação",
-      "emoji": "🧽",
-      "description": "Para lavar as mamadeiras em qualquer lugar.",
-      "price": 13.59,
-      "currency": "EUR",
-      "url": "https://www.amazon.fr/-/en/dp/B0DFM9SQWC",
-      "photo": "https://m.media-amazon.com/images/I/61-Qg+kAxkL._AC_SL600_.jpg"
-    },
-    {
-      "id": "high-chair",
-      "name": "Cadeira evolutiva",
-      "category": "Alimentação",
-      "emoji": "🪑",
-      "description": "Para crescer junto com o bebê.",
-      "items": [
-        {
-          "price": 139,
-          "currency": "EUR",
-          "url": "https://fr.deryan.com/products/odin-luxe-houten-meegroeistoel-kinderstoel-met-bouncer-inclusief-eetblad-verstelbare-kinderstoel-wood-nougat",
-          "photo": "https://cdn.shopify.com/s/files/1/0774/0329/1986/files/OdinWood_bouncernougat_1.jpg?v=1794580302&width=600"
-        },
-        {
-          "price": 119,
-          "currency": "EUR",
-          "url": "https://fr.deryan.com/products/oak-luxe-kinderstoel-met-bouncer-donkerbruin",
-          "photo": "https://cdn.shopify.com/s/files/1/0774/0329/1986/files/OakBrown_Bouncer1_0f71377c-e0f9-40fa-a5d3-33a23136c39e.jpg?v=1794580157&width=600"
-        },
-        {
-          "price": 159.9,
-          "currency": "EUR",
-          "url": "https://www.vertbaudet.fr/chaise-haute-evolutive-born-up-avec-transat-deperlant-et-inclinable-roba-style-naturel-vert-givre.htm?ProductId=A0000FP82&FiltreCouleur=HGT2&FiltreTaille=TU",
-          "photo": "https://media.vertbaudet.fr/Pictures/vertbaudet/565163/chaise-haute-evolutive-born-up-avec-transat-deperlant-et-inclinable-roba-style.jpg"
-        },
-        {
-          "price": 189.9,
-          "currency": "EUR",
-          "url": "https://www.amazon.fr/-/en/dp/B0DJT9C1JV",
-          "photo": "https://m.media-amazon.com/images/I/61cOdT8hFmL._AC_SL600_.jpg"
-        }
+      "id": "sleep",
+      "name": "Soneca",
+      "emoji": "🌜",
+      "color": "pink",
+      "description": "Para as noites de sono.",
+      "gifts": [
+        "Berço",
+        "Babá eletrônica",
+        "Cueiro"
       ]
     }
   ]

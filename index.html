@@ -21,56 +21,34 @@
   </header>
 
   <main>
-    <div id="filters" role="group" aria-label="Filtrar por categoria"></div>
     <p id="load-error" class="error" role="alert" hidden>A lista de presentes não carregou. Recarregue a página.</p>
-    <!-- #gifts is the box that slides sideways. app.js fills the list inside it. -->
-    <div class="carousel">
-      <button type="button" class="arrow" id="previous" aria-label="Presentes anteriores">‹</button>
-      <div id="gifts" class="scroller"><ul class="gift-list"></ul></div>
-      <button type="button" class="arrow" id="next" aria-label="Próximos presentes">›</button>
-    </div>
+    <!-- app.js adds one card per theme of gifts.json. -->
+    <div id="themes"></div>
   </main>
 
-  <template id="gift-card">
-    <li>
-      <button type="button" class="gift">
-        <span class="disc" aria-hidden="true"></span>
-        <span class="gift-name"></span>
-        <span class="gift-description"></span>
-      </button>
-    </li>
-  </template>
-
-  <!-- One product option of a gift: store photo (or the emoji disc), price and link. -->
-  <template id="gift-option">
-    <div class="option">
-      <div class="option-media"><span class="disc" aria-hidden="true"></span></div>
-      <p class="gift-name"></p>
-      <p class="gift-description"></p>
-      <p class="option-price"></p>
-      <a class="option-link" target="_blank" rel="noopener noreferrer" hidden>Ver o produto na loja</a>
-    </div>
+  <!-- One theme: emoji, name and phrase, the gifts it covers, and the button that opens the dialog. -->
+  <template id="theme-card">
+    <section class="theme">
+      <span class="disc" aria-hidden="true"></span>
+      <div class="theme-title">
+        <h2 class="theme-name"></h2>
+        <p class="theme-description"></p>
+      </div>
+      <ul class="theme-gifts" role="list"></ul>
+      <button type="button" class="contribute">Quero contribuir</button>
+    </section>
   </template>
 
   <!-- Closes with the button, with the Esc key, or with a click outside it (see app.js). -->
-  <dialog id="gift-dialog" aria-labelledby="dialog-name">
+  <dialog id="contribution" aria-labelledby="dialog-name">
     <!-- The button stays at the top right corner, over the content, also when the dialog scrolls. -->
     <form method="dialog" class="close-row"><button class="close" aria-label="Fechar">×</button></form>
 
-    <!-- Step 1, top: one slide per product option of the gift. With more than one
-         option, the slides move sideways and the arrows and the counter show. -->
-    <div class="options">
-      <button type="button" class="arrow" id="previous-option" aria-label="Opção anterior">‹</button>
-      <div id="gift-options" class="scroller"></div>
-      <button type="button" class="arrow" id="next-option" aria-label="Próxima opção">›</button>
-    </div>
-    <p id="option-count" class="hint"></p>
-
-    <!-- Step 2, top: the gift in short. -->
-    <div id="gift-summary">
+    <!-- The theme the guest contributes to. -->
+    <div id="dialog-theme">
       <div class="disc" aria-hidden="true"></div>
-      <h2 id="dialog-name" class="gift-name"></h2>
-      <p class="gift-description"></p>
+      <h2 id="dialog-name" class="theme-name"></h2>
+      <p class="theme-description"></p>
     </div>
 
     <!-- Step 1: choose the amount. -->
@@ -102,7 +80,7 @@
           <!-- The Web3Forms access key is public by design: it only says which inbox gets the note. -->
           <input type="hidden" name="access_key" value="c738f691-4076-44a4-80f8-c8099d2c1fbd">
           <input type="hidden" name="subject" value="Recado do Café Bébé">
-          <input type="hidden" name="gift">
+          <input type="hidden" name="theme">
           <input type="hidden" name="amount">
           <!-- Honeypot: bots tick it, Web3Forms then drops the submission. -->
           <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
