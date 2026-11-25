@@ -81,6 +81,19 @@ button,
   font-size: 0.9375rem;
 }
 
+/* Welcome text on an opaque card, so the artwork behind it does not disturb reading. */
+.welcome {
+  max-width: 36rem;
+  margin: 1.5rem auto 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--paper);
+}
+
+.welcome p + p {
+  margin-top: 0.75rem;
+}
+
 /* Pills: category filter and suggested amounts */
 
 #filters,
