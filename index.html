@@ -24,6 +24,45 @@
     <p id="load-error" class="error" role="alert" hidden>A lista de presentes não carregou. Recarregue a página.</p>
     <!-- app.js adds one card per theme of gifts.json. -->
     <div id="themes"></div>
+
+    <!-- For guests who buy clothes: the season the baby meets at each age. A timeline,
+         top to bottom on a phone and left to right on a wide screen. -->
+    <section class="guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">Guia das estações</h2>
+      <p>Vai comprar roupinha? Moramos no hemisfério norte, e aqui as estações são invertidas em relação ao Brasil.</p>
+      <ol class="seasons" role="list">
+        <li data-color="blue">
+          <span class="disc" aria-hidden="true">❄️</span>
+          <h3>0 meses</h3>
+          <p class="season-months">Março</p>
+          <p>Inverno</p>
+        </li>
+        <li data-color="lime">
+          <span class="disc" aria-hidden="true">🌷</span>
+          <h3>3 meses</h3>
+          <p class="season-months">Abril a junho</p>
+          <p>Primavera</p>
+        </li>
+        <li data-color="orange">
+          <span class="disc pair" aria-hidden="true">☀️⛈️</span>
+          <h3>6 meses</h3>
+          <p class="season-months">Julho a setembro</p>
+          <p>Verão em Paris, inverno em Floripa. Esperamos fazer meio a meio.</p>
+        </li>
+        <li data-color="coral">
+          <span class="disc pair" aria-hidden="true">🍂🌨️</span>
+          <h3>9 meses</h3>
+          <p class="season-months">Outubro a dezembro</p>
+          <p>Outono e inverno, com temperaturas bem baixas</p>
+        </li>
+        <li data-color="blue">
+          <span class="disc" aria-hidden="true">❄️</span>
+          <h3>12 meses</h3>
+          <p class="season-months">Dezembro a março</p>
+          <p>Inverno com muito, muito frio</p>
+        </li>
+      </ol>
+    </section>
   </main>
 
   <!-- One theme: emoji, name and phrase, the gifts it covers, and the button that opens the dialog. -->
