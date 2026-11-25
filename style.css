@@ -171,13 +171,9 @@ button,
   transform: rotate(-8deg) scale(1.06);
 }
 
-/* Name and phrase share a line when they fit. Otherwise the phrase goes under the name. */
+/* The name, with the phrase always on the line under it. */
 .theme-title {
   grid-area: title;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.125rem 0.875rem;
 }
 
 .theme-name {
@@ -188,7 +184,7 @@ button,
 }
 
 .theme-description {
-  margin: 0;
+  margin: 0.125rem 0 0;
   font-size: 0.9375rem;
   line-height: 1.4;
 }
