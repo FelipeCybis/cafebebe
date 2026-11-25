@@ -16,6 +16,7 @@
       "emoji": "🛺",
       "color": "lime",
       "description": "Para os rolezinhos.",
+      "suggestedAmounts": [100, 300, 500],
       "gifts": [
         "Cadeirinha para o carro",
         "Carrinho de bebê",
@@ -58,6 +59,7 @@
       "emoji": "🌜",
       "color": "pink",
       "description": "Para noites bem dormidas dos papais também.",
+      "suggestedAmounts": [100, 300, 500],
       "gifts": [
         "Berço",
         "Babá eletrônica",

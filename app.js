@@ -50,9 +50,23 @@ function updateGenerateButton() {
   $("#amount-error").textContent = "";
 }
 
+// A pill that fills in one suggested amount.
+function suggestionButton(amount) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = `R$ ${amount}`;
+  button.addEventListener("click", () => {
+    amountInput.value = String(amount);
+    updateGenerateButton();
+  });
+  return button;
+}
+
 function openTheme(theme) {
   currentTheme = theme;
   showTheme($("#dialog-theme"), theme);
+  // A theme can list its own suggested amounts. Without them, it gets the general list.
+  $("#suggestions").replaceChildren(...(theme.suggestedAmounts ?? suggestedAmounts).map(suggestionButton));
   amountForm.reset();
   noteForm.reset();
   noteForm.hidden = false;
@@ -95,17 +109,6 @@ for (const theme of themes) {
 }
 
 // Step 1: amount.
-for (const amount of suggestedAmounts) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.textContent = `R$ ${amount}`;
-  button.addEventListener("click", () => {
-    amountInput.value = String(amount);
-    updateGenerateButton();
-  });
-  $("#suggestions").append(button);
-}
-
 amountInput.addEventListener("input", updateGenerateButton);
 
 amountForm.addEventListener("submit", (event) => {
