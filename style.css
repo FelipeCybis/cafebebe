@@ -1,7 +1,7 @@
 /* Palette taken from the colored-pencil artwork (cafebebe_background.jpeg):
    navy ink for text, cobalt for the actions in the dialog, pencil tints for the themes. */
 :root {
-  --paper: rgb(224 229 216); /* the page: a pale sage. Cards and discs that sit on it are white. */
+  --paper: rgb(254 254 252); /* the page: a warm off-white. Cards and discs that sit on it are white. */
   --ink: #1d2b5e;
   --ink-soft: #55608a;
   --blue: #2c4fc0;
@@ -53,14 +53,21 @@ button,
 
 /* Hero */
 
-/* The artwork as a full-width banner, tiled sideways. A white veil at 80% lightens it:
-   the banner is opaque, so it looks the same whatever the color of the page. */
 .hero {
+  position: relative;
+  isolation: isolate;
   padding: 2rem 1rem;
-  background:
-    linear-gradient(rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.8)),
-    url("cafebebe_background.jpeg") 0 0 / 30rem;
   text-align: center;
+}
+
+/* The artwork as a full-width banner behind the hero, tiled sideways at 20% strength. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("cafebebe_background.jpeg") 0 0 / 30rem;
+  opacity: 0.2;
 }
 
 .hero h1 {
