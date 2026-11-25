@@ -53,21 +53,14 @@ button,
 
 /* Hero */
 
+/* The artwork as a full-width banner, tiled sideways. A white veil at 80% lightens it:
+   the banner is opaque, so it looks the same whatever the color of the page. */
 .hero {
-  position: relative;
-  isolation: isolate;
   padding: 2rem 1rem;
+  background:
+    linear-gradient(rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.8)),
+    url("cafebebe_background.jpeg") 0 0 / 30rem;
   text-align: center;
-}
-
-/* The artwork as a full-width banner behind the hero, tiled sideways at 20% strength. */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: url("cafebebe_background.jpeg") 0 0 / 30rem;
-  opacity: 0.2;
 }
 
 .hero h1 {
