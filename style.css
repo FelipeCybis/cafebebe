@@ -47,7 +47,7 @@ button,
 .hero {
   position: relative;
   isolation: isolate;
-  padding: 3rem 1rem 2rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
@@ -63,9 +63,13 @@ button,
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(3rem, 15vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+}
+
+.hero h1 img {
+  display: block;
+  width: min(65vw, 18rem);
+  height: auto;
+  margin: 0 auto;
 }
 
 .hero p {
