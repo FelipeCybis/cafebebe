@@ -479,6 +479,26 @@ dialog p {
   text-align: left;
 }
 
+/* While the two parts are stacked (a phone), the Pix part keeps only what a phone
+   needs, so the note starts in view: no QR code (a phone cannot scan its own screen),
+   a shorter code box, and the theme reduced to its name. */
+@media (max-width: 47.99rem) {
+  dialog[data-step="pay"] .disc,
+  dialog[data-step="pay"] .theme-description,
+  #qr,
+  #qr + .hint {
+    display: none;
+  }
+
+  dialog[data-step="pay"] .theme-name {
+    margin-top: 0;
+  }
+
+  #pix-code {
+    height: 3.75rem;
+  }
+}
+
 @media (min-width: 48rem) {
   dialog[data-step="pay"] {
     width: min(100% - 2rem, 52rem);
