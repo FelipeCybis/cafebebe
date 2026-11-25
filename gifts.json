@@ -15,7 +15,7 @@
       "name": "Passeio",
       "emoji": "🛺",
       "color": "lime",
-      "description": "Para os passeios no parque.",
+      "description": "Para os rolezinhos.",
       "gifts": [
         "Cadeirinha para o carro",
         "Carrinho de bebê",
@@ -28,7 +28,7 @@
       "name": "Banho e cuidado",
       "emoji": "🛁",
       "color": "blue",
-      "description": "Para o banho e os cuidados do dia a dia.",
+      "description": "Tchau, preguiça! Tchau, sujeira! Adeus, cheirinho de suor!",
       "gifts": [
         "Banheira",
         "Aspirador nasal",
@@ -57,7 +57,7 @@
       "name": "Soneca",
       "emoji": "🌜",
       "color": "pink",
-      "description": "Para as noites de sono.",
+      "description": "Para noites bem dormidas dos papais também.",
       "gifts": [
         "Berço",
         "Babá eletrônica",
